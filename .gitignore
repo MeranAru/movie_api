@@ -85,3 +85,8 @@ node_modules/unpipe/LICENSE
 node_modules/utils-merge/.npmignore
 node_modules/utils-merge/LICENSE
 node_modules/vary/LICENSE
+node_modules/basic-auth/LICENSE
+node_modules/basic-auth/node_modules/safe-buffer/LICENSE
+node_modules/on-headers/LICENSE
+node_modules/morgan/node_modules/on-finished/LICENSE
+node_modules/morgan/LICENSE
