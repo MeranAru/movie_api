@@ -1,78 +1,80 @@
-const express = require('express');
-const app = express();
+const express = require('express'),
+    morgan = require('morgan'),
+    //import built in node modules fs and path
+    fs = require('fs'),
+    path = require('path');
+const { Stream } = require('stream');
+    const app = express();
+    const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
 
-let topBooks = [
+    //send all files automatically to the public folder
+    app.use(express.static('public'));
+    //setup the logger
+    app.use(morgan('combined', {stream: accessLogStream}));
+
+let topMovies = [
     {
-        title: 'Harry Pother and the Sorceror Stone',
-        author: 'J.K Rowling'
+        title: 'Fast and the Furious',
+        year: '2009'
     },
     {
-        title: 'Lord of the Rings',
-        author: 'J.R.R. Tolkien'
+        title: 'Avengers: Endgame',
+        year: '2019'
     },
     {
-        title: 'Twilight',
-        author: 'Stephanie Meyer'
+        title: 'Spider-Man: No way Home',
+        year: '2021'
+    },
+    {
+        title: 'The Dark Knight',
+        year: '2008'
+    },
+    {
+        title: 'The Matrix',
+        year: '1999'
+    },
+    {
+        title: 'Joker',
+        year: '2019'
+    },
+    {
+        title: 'John Wick: Chapter 4',
+        year: '2023'
+    },
+    {
+        title: 'Get Out',
+        year: '2017'
+    },
+    {
+        title: 'IT',
+        year: '2017',
+    },
+    {
+        title: 'Insidious',
+        year: '2010'
     }
 ];
 
-let myLogger = (req, res, next) => {
-    console.log(req.url);
-    next()
-};
-
-let requestTime = (req, res, next) => {
-    req.requestTime = Date.now();
-    next();
-};
-
-app.use(myLogger);
-app.use(requestTime);
-
-//Get Requests
-app.get('/', (req, res) => {
-    let responseText = 'Welcome to my app!';
-    responseText += '<small>Requested at: ' + req.requestTime + '</small>';
-    res.send(responseText);
-});
-app.get('/secreturl', (req, res) => {
-    let responseText = 'This is a secret url with super top-secret content.';
-});
-
+//Get requests
 app.get('/', (req,res) => {
-    res.send('Welcome to my bookclub!');
+    res.send('Welcome to my movie club!');
 });
-
-app.listen(8080, () => {
-    console.log('Your app is listening on port 8080')
-})
 
 app.get('/documentation', (req,res) => {
     res.sendFile('public/documentation.html', { root: __dirname});
 });
 
-app.get('/books', (req,res) => {
-    res.json(topBooks);
+app.get('/movies', (req,res) => {
+    res.json(topMovies);
+});
+
+//Error code that detects errors above
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
 });
 
 //listen for Requests
-app.listen(8080, () => {
+app.listen(8080, () =>{
     console.log('Your app is listening on port 8080')
-})
-
-
-const http = required('http'),
-    url = require('url');
-
-http.createServer((request, response) => {
-    let requestURL = url.parse(request.url, true);
-    if ( requestURL.pathname == '/documentation.html') {
-        response.writeHead(200, {'Content-Type': 'text/plain'});
-        response.end('Documentation on the bookclub API.\n');
-    }else{
-        response.writeHead(200, {'Content-Type': 'text/plain'});
-        response.end('Welcome to my bookclub!\n');
-    }
-}) .listen(8080);
-
-console.log('My first Node test server is running on port 8080.');
+});
