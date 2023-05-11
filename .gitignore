@@ -90,3 +90,6 @@ node_modules/basic-auth/node_modules/safe-buffer/LICENSE
 node_modules/on-headers/LICENSE
 node_modules/morgan/node_modules/on-finished/LICENSE
 node_modules/morgan/LICENSE
+*.lock
+*.nix
+node_modules/lodash/LICENSE
