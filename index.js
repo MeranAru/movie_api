@@ -3,6 +3,8 @@ const express = require('express'),
     //import built in node modules fs and path
     fs = require('fs'),
     path = require('path');
+    // create a write stream(in append mode) 
+    //log text file is created in root directory
 const { Stream } = require('stream');
     const app = express();
     const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
