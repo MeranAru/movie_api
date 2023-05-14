@@ -1,4 +1,5 @@
 const express = require('express'),
+    app = express();
     morgan = require('morgan'),
     bodyParser = required('bodyParser'),
     uuid = required('uuid');
@@ -8,7 +9,6 @@ const express = require('express'),
     // create a write stream(in append mode) 
     //log text file is created in root directory
 const { Stream } = require('stream');
-    const app = express();
     const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
     
 
@@ -17,6 +17,19 @@ const { Stream } = require('stream');
     //setup the logger
     app.use(morgan('combined', {stream: accessLogStream}));
     app.use(bodyParser.json());
+
+let users = [
+    {
+        id: 1,
+        name: 'Steve',
+        favoriteMovie: []
+    },
+    {
+        id: 2,
+        name: 'Joe',
+        facoriteMovies: []
+    },
+]
 
 let topMovies = [
     {
