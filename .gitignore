@@ -96,3 +96,12 @@ node_modules/lodash/LICENSE
 node_modules/.bin/uuid
 node_modules/uuid/dist/bin/uuid
 *.mjs
+node_modules/.bin/_nodeman
+node_modules/.bin/nodeman
+node_modules/colors/LICENSE
+node_modules/nodeman/.npmignore
+node_modules/nodeman/bin/_nodeman
+node_modules/nodeman/bin/bot
+node_modules/nodeman/bin/bot2
+node_modules/nodeman/bin/nodeman
+*.coffee
