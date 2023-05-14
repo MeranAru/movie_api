@@ -93,3 +93,6 @@ node_modules/morgan/LICENSE
 *.lock
 *.nix
 node_modules/lodash/LICENSE
+node_modules/.bin/uuid
+node_modules/uuid/dist/bin/uuid
+*.mjs
