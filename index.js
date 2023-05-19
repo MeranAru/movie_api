@@ -65,9 +65,100 @@ let movies = [
             Description: 'In the movie industry, action movies is when a protaganist is sent into numerous events which have violence.',
             },
         Director: {
-            name: 'Jon Watts',
-            born: 'June 28, 1981',
-            bio: 'Jon Watts is an American filmmaker and screenwriter.'
+            Name: 'Jon Watts',
+            Born: 'June 28, 1981',
+            Bio: 'Jon Watts is an American filmmaker and screenwriter.'
+        },
+    },
+    {
+        Title: 'The Boy Next Door',
+        Description: 'A woman, separated from her unfaithful husband, falls for a younger man who has moved in next door, but their torrid affair soon takes a dangerous turn.',
+        Genre: {
+            Name: 'Thriller',
+            Description: 'In the movie industry, thriller movies is when a movie has an exciting plot, typically involving crime or espionage.',
+            },
+        Director: {
+            Name: 'Rob Cohen',
+            Born: 'March 12, 1949',
+            Bio: 'Rob Cohen is an American film director, producer and screenwriter.'
+        },
+    },
+    {
+        Title: 'The Dark Knight',
+        Description: 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.',
+        Genre: {
+            Name: 'Action',
+            Description: 'In the movie industry, action movies is when a protaganist is sent into numerous events which have violence.',
+            },
+        Director: {
+            Name: 'Christopher Nolan',
+            Born: 'July 30, 1970',
+            Bio: 'Christopher Nolan is a cerebral, often nonlinear, storytelling, acclaimed writer-director.'
+        },
+    },
+    {
+        Title: 'Fight Club',
+        Description: 'An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more.',
+        Genre: {
+            Name: 'Drama',
+            Description: 'In the movie industry, drama movies is a category or genre of narrative fiction (or semi-fiction) intended to be more serious than humorous in tone.',
+            },
+        Director: {
+            Name: 'David Fincher',
+            Born: 'August 28, 1962',
+            Bio: 'David Fincher is a film director.'
+        },
+    },
+    {
+        Title: 'Inception',
+        Description: 'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.',
+        Genre: {
+            Name: 'Action',
+            Description: 'In the movie industry, action movies is when a protaganist is sent into numerous events which have violence.',
+            },
+        Director: {
+            Name: 'Christopher Nolan',
+            Born: 'July 30, 1970',
+            Bio: 'Christopher Nolan is a cerebral, often nonlinear, storytelling, acclaimed writer-director.'
+        },
+    },
+    {
+        Title: 'Wall-e',
+        Description: 'In the distant future, a small waste-collecting robot inadvertently embarks on a space journey that will ultimately decide the fate of mankind.',
+        Genre: {
+            Name: 'Animation',
+            Description: 'In the movie industry, animation movies is the process of making films in which drawings or puppets appear to move',
+            },
+        Director: {
+            Name: 'Andrew Stanton',
+            Born: 'December 3, 1965',
+            Bio: 'Andrew Stanton has been a major creative force at Pixar Animation Studios since 1990, when he became the second animator and ninth employee to join the company elite group of computer animation pioneers.'
+        },
+    },
+    {
+        Title: 'Joker',
+        Description: 'The rise of Arthur Fleck, from aspiring stand-up comedian and pariah to Gotham clown prince and leader of the revolution.',
+        Genre: {
+            Name: 'Thriller',
+            Description: 'In the movie industry, thriller movies is when a movie has an exciting plot, typically involving crime or espionage.',
+            },
+        Director: {
+            Name: 'Todd Phillips',
+            Born: 'December 20, 1970',
+            Bio: 'Todd Phillips is an American film director, producer, and screenwriter.'
+        },
+    },
+    {
+        Title: 'Guardians of the Galaxy Vol. 3',
+        Description: 'Still reeling from the loss of Gamora, Peter Quill rallies his team to defend the universe and one of their own - a mission that could mean the end of the Guardians if not successful.',
+        Genre: {
+            Name: 'Action',
+            Description: 'In the movie industry, action movies is when a protaganist is sent into numerous events which have violence.',
+            },
+        Director: {
+            Name: 'James Gunn',
+            Born: 'August 5, 1966',
+            Bio: 'James Gunn wrote and acted in the film The Specials (2000) with Rob Lowe, Jamie Kennedy, Thomas J. Churchill and his brother Sean Gunn.'
         },
     }
 ];
