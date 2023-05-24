@@ -127,7 +127,7 @@ let movies = [
         Description: 'In the distant future, a small waste-collecting robot inadvertently embarks on a space journey that will ultimately decide the fate of mankind.',
         Genre: {
             Name: 'Animation',
-            Description: 'In the movie industry, animation movies is the process of making films in which drawings or puppets appear to move',
+            Description: 'In the movie industry, animation movies is the process of making films in which drawings or puppets appear to move.',
             },
         Director: {
             Name: 'Andrew Stanton',
