@@ -1,5 +1,10 @@
 const express = require('express');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
+const Models = require('/models.js');
+const Movies = Models.Movie;
+const Users= Models.User;
+mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true});
 const bodyParser = require('body-parser');
 const uuid = require('uuid');
     //import built in node modules fs and path
