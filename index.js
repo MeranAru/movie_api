@@ -10,6 +10,7 @@ const uuid = require('uuid');
     //import built in node modules fs and path
 const fs = require('fs');
 const path = require('path');
+const { error } = require('console');
     // create a write stream(in append mode) 
     //log text file is created in root directory
 const app = express();
@@ -179,16 +180,31 @@ app.get('/documentation', (req,res) => {
 
 //Create
 app.post('/users', (req,res) =>{
-    const newUser = req.body;
+    Users.findOne({ Username: req.body.Username })
+        .then((user) => {
+            if (user) {
+                return res.status(400).send(req.body.Username + 'already exists');
+            } else {
+                Users
+                    .create({
+                        Username: req.body.Username,
+                        Password: req.body.Password,
+                        Email: req.body.Email,
+                        Birthday: req.body.Birthday
+                    })
+                    .then ((user) => {res.status(201).json(user) })
+                    .catch((error) => {
+                        console.error(error);
+                        res.status(500).send('Error' + error);
+                    })
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+            res.status(500).send('Error' + error);
+        });
+});
 
-    if (newUser.name) {
-        newUser.id = uuid.v4();
-        users.push(newUser);
-        res.status(200).json(newUser)
-    } else {
-        res.status(400).send('users need names')
-    }
-})
 //Update
 app.put('/users/:id', (req,res) =>{
     const { id } = req.params;
