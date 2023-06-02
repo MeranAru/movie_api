@@ -185,3 +185,5 @@ URL: //nTimestamp: Mon May 08 2023 16:03:41 GMT-0400 (Eastern Daylight Saving Ti
 ::1 - - [31/May/2023:04:57:47 +0000] "PUT /users/Meran HTTP/1.1" 500 16 "-" "PostmanRuntime/7.32.2"
 ::1 - - [31/May/2023:04:58:03 +0000] "PUT /users/Meran HTTP/1.1" 500 16 "-" "PostmanRuntime/7.32.2"
 ::1 - - [31/May/2023:04:58:21 +0000] "DELETE /users/Meran HTTP/1.1" 200 16 "-" "PostmanRuntime/7.32.2"
+::1 - - [01/Jun/2023:02:39:39 +0000] "DELETE /users HTTP/1.1" 404 147 "-" "PostmanRuntime/7.32.2"
+::1 - - [01/Jun/2023:02:39:46 +0000] "GET /users HTTP/1.1" 201 255 "-" "PostmanRuntime/7.32.2"
