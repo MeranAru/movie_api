@@ -13,8 +13,6 @@ const Users = Models.User;
 
 //send all files automatically to the public folder
 app.use(express.static('public'));
-//setup the logger
-app.use(morgan('combined', {stream: accessLogStream}));
 app.use(bodyParser.json());
 
 let auth = require('./auth')(app);
@@ -23,14 +21,20 @@ require('./passport');
 
 mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true});
 
+//setup the logger
+let logger = (req, res, next) => {
+    console.log(req.url);
+    next();
+};
+
+app.use(logger);
+
 //import built in node modules fs and path
 const fs = require('fs');
 const path = require('path');
 const { error } = require('console');
 
-// create a write stream(in append mode) 
-//log text file is created in root directory
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
+
 
 let users = [
     {
