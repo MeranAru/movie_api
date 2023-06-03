@@ -1,7 +1,7 @@
 const express = require('express');
-const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const app = express();
 const uuid = require('uuid');
 
 const mongoose = require('mongoose');
@@ -13,6 +13,7 @@ const Users = Models.User;
 
 //send all files automatically to the public folder
 app.use(express.static('public'));
+app.use(morgan);
 app.use(bodyParser.json());
 
 let auth = require('./auth')(app);
@@ -33,8 +34,6 @@ app.use(logger);
 const fs = require('fs');
 const path = require('path');
 const { error } = require('console');
-
-
 
 let users = [
     {
