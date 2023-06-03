@@ -1,32 +1,36 @@
 const express = require('express');
+const app = express();
+const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const uuid = require('uuid');
-const morgan = require('morgan');
+
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+
+const Movies = Models.Movie;
+const Users = Models.User;
+
+
+//send all files automatically to the public folder
+app.use(express.static('public'));
+//setup the logger
+app.use(morgan('combined', {stream: accessLogStream}));
+app.use(bodyParser.json());
+
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
+
+mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true});
+
 //import built in node modules fs and path
 const fs = require('fs');
 const path = require('path');
 const { error } = require('console');
-const app = express();
+
 // create a write stream(in append mode) 
 //log text file is created in root directory
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
-const mongoose = require('mongoose');
-const Models = require('./models.js');
-const Movies = Models.Movie;
-const Users = Models.User;
-
-    //send all files automatically to the public folder
-    app.use(express.static('public'));
-    //setup the logger
-    app.use(morgan('combined', {stream: accessLogStream}));
-    app.use(bodyParser.json());
-
-    let auth = require('./auth')(app);
-    const passport = require('passport');
-    require('./passport');
-
-
-mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true});
 
 let users = [
     {
@@ -200,7 +204,7 @@ app.get('/movies', passport.authenticate('jwt', { session: false }), (req,res) =
 app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req,res) => {
     Movies.findOne({ Title: req.params.Title })
     .then((movies) => {
-        res.json(movies);
+        res.status(200).json(movies);
     })
     .catch((err) => {
         console.error(err);
@@ -209,10 +213,10 @@ app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req
 });
 
 // GET JSON genre info when looking for specific genre
-app.get('/movies/genres/:Genre', passport.authenticate('jwt', { session: false }), (req,res) => {
-    Movies.findOne({ 'Genre.Name': req.params.Genre })
-    .then((genre) => {
-        res.json(genre);
+app.get('/movies/genres/:genreName', passport.authenticate('jwt', { session: false }), (req,res) => {
+    Movies.find({ 'Genre.Name': req.params.genreName })
+    .then((movies) => {
+        res.status(200).json(movies);
     })
     .catch((err) => {
         console.error(err);
@@ -221,10 +225,10 @@ app.get('/movies/genres/:Genre', passport.authenticate('jwt', { session: false }
 });
 
 // GET JSON genre info when looking for specific Director
-app.get('/movies/directors/:Director', passport.authenticate('jwt', { session: false }), (req,res) => {
-    Movies.findOne({ 'Director.Name': req.params.Director })
-    .then((director) => {
-        res.json(director);
+app.get('/movies/directors/:directorName', passport.authenticate('jwt', { session: false }), (req,res) => {
+    Movies.find({ 'Director.Name': req.params.directorName })
+    .then((movies) => {
+        res.status(200).json(movies);
     })
     .catch((err) => {
         console.error(err);
@@ -240,7 +244,7 @@ app.get('/users', passport.authenticate('jwt', { session: false }), (req,res) =>
         })
         .catch((err) => {
             console.error(err);
-            res.status(500).send('Error' + err);
+            res.status(500).send('Error: ' + err);
         });
 });
 
@@ -277,13 +281,13 @@ app.post('/users', passport.authenticate('jwt', { sessiom: false }), (req,res) =
                     })
                     .catch((error) => {
                         console.error(error);
-                        res.status(500).send('Error' + error);
+                        res.status(500).send('Error: ' + error);
                     })
             }
         })
         .catch((error) => {
             console.error(error);
-            res.status(500).send('Error' + error);
+            res.status(500).send('Error: ' + error);
         });
 });
 
