@@ -1,5 +1,9 @@
 const express = require('express');
 const morgan = require('morgan');
+//import built in node modules fs and path
+const fs = require('fs');
+const path = require('path');
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
 const bodyParser = require('body-parser');
 const app = express();
 const uuid = require('uuid');
@@ -13,8 +17,10 @@ const Users = Models.User;
 
 //send all files automatically to the public folder
 app.use(express.static('public'));
-app.use(morgan);
+app.use(express.json());
+app.use(morgan('combined', {stream: accessLogStream}));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 let auth = require('./auth')(app);
 const passport = require('passport');
@@ -23,17 +29,8 @@ require('./passport');
 mongoose.connect('mongodb://localhost:27017/movies', { useNewUrlParser: true, useUnifiedTopology: true});
 
 //setup the logger
-let logger = (req, res, next) => {
-    console.log(req.url);
-    next();
-};
 
-app.use(logger);
-
-//import built in node modules fs and path
-const fs = require('fs');
-const path = require('path');
-const { error } = require('console');
+//app.use(logger);
 
 let users = [
     {
@@ -240,7 +237,7 @@ app.get('/movies/directors/:directorName', passport.authenticate('jwt', { sessio
 });
 
 //Read
-app.get('/users', passport.authenticate('jwt', { session: false }), (req,res) => {
+app.get('/users', (req,res) => {
     Users.find()
         .then((users) => {
             res.status(201).json(users);
@@ -251,7 +248,7 @@ app.get('/users', passport.authenticate('jwt', { session: false }), (req,res) =>
         });
 });
 
-app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req,res) => {
+app.get('/users/:Username', (req,res) => {
     Users.findOne({ Username: req.params.Username})
     .then((user) => {
         if (user) {
@@ -267,7 +264,7 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (r
 });
 
 //Create
-app.post('/users', passport.authenticate('jwt', { sessiom: false }), (req,res) => {
+app.post('/users', (req,res) => {
     Users.findOne({ Username: req.body.Username })
         .then((user) => {
             if (user) {
@@ -277,7 +274,7 @@ app.post('/users', passport.authenticate('jwt', { sessiom: false }), (req,res) =
                         Username: req.body.Username,
                         Password: req.body.Password,
                         Email: req.body.Email,
-                        Birthday: req.body.Birthday,
+                        Birthday: req.body.Birthday
                     })
                     .then ((user) => {
                         res.status(201).json(user);
