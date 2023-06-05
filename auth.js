@@ -23,10 +23,11 @@ module.exports = (router) => {
                 });
             }
             req.login(user, { session: false }, (error) => {
-                if(error) {
+                if (error) {
                     res.send(error);
                 }
                 let token = generateJWTToken(user.toJSON());
+                return res.json({ user: user, token:token });
             });
         })(req,res);
     });
