@@ -13,6 +13,11 @@ const Models = require('./models.js');
 
 const Movies = Models.Movie;
 const Users = Models.User;
+const Genres = Models.Genre;
+const Director= Models.Director;
+
+const cors = require('cors');
+app.use(cors());
 
 
 //send all files automatically to the public folder
