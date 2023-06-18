@@ -33,6 +33,8 @@ let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
 
+//mongoose.connect( "mongodb+srv://meranarumugam:12345@movieapi.0isxclf.mongodb.net/myFlixDB?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true});
+
 mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true});
 
 //setup the logger
@@ -289,7 +291,7 @@ app.post('/users', (req,res) => {
         return res.status(422).json({ errors: errors.array()});
     }
 }
-    let hashedPassword = Users.hashedPassword(req.body.Password);
+    let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOne({ Username: req.body.Username }) // Search to see if a user with the requested username already exists
         .then((user) => {
             if (user) { //If the user is found, send a response that it already exists
