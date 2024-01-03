@@ -359,6 +359,28 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), (r
     });
 });
 
+app.put(
+    '/users/:Username/:MovieId',
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+        Users.findOneAndUpdate(
+            { Username: req.params.Username },
+            { $push: { FavoriteMovies: req.params.MovieId } },
+            { new: true },
+            (err, updatedUser) => {
+                if (err) {
+                    console.error(err);
+                    res.status(500).send('Error: ' + err);
+                } else if (!updatedUser) {
+                    res.status(400).send(req.params.Username + ' was not found.');
+                } else {
+                    res.json(updatedUser);
+                }
+            }
+        );
+    }
+);
+
 //Delete
 app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), (req,res) =>{
     Users.findOneAndRemove(
