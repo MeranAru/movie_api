@@ -1,4 +1,4 @@
-#Movie API
+# Movie API
 This is a node.js project built with express which contains the whole API for the myFlix Application.
 
 ## Prerequisites
