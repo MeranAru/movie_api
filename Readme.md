@@ -1,20 +1,21 @@
-Movie API
-
+#Movie API
 This is a node.js project built with express which contains the whole API for the myFlix Application.
 
-Prerequisites
-Install Node.js
-Install mongodb
-Installation
-Clone the repository.
-Navigate to the project directory in the terminal.
-Run npm install to install the necessary dependencies.
-Setup mongoDB database and tables
-Technologies Used
-Node.js
-Express
-Mongoose (mongoDB)
-Defining endpoints
+## Prerequisites
+- Install Node.js
+- Install mongodb
+
+## Installation
+1. Clone the repository.
+2. Navigate to the project directory in the terminal.
+3. Run npm install to install the necessary dependencies.
+4. Setup mongoDB database and tables
+
+## Technologies Used
+- Node.js
+- Express
+- Mongoose (mongoDB)
+- Defining endpoints
 
 1. return all movies READ endpoint:
 /movies
