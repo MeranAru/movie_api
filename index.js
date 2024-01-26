@@ -412,9 +412,10 @@ app.put(
     (req, res) => {
         Users.findOneAndUpdate(
             { Username: req.params.Username },
-            { $push: { FavoriteMovies: req.params.MovieId } },
+            { $push: { FavouriteMovies: req.params.MovieId } },
             { new: true },
             (err, updatedUser) => {
+                console.log('updated user', updatedUser) 
                 if (err) {
                 console.error(err);
                 res.status(500).send('Error: ' + err);
